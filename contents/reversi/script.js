@@ -113,6 +113,7 @@ function onload() {
     generate_board();
     let prompt = document.getElementById("prompt");
     prompt.textContent = "白色の手番です";
+    reset_board();
 }
 function generate_board() {
     // ゲーム盤を用意する
