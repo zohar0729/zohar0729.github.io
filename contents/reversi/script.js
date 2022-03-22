@@ -132,9 +132,10 @@ function generate_board() {
     }
     let board = document.createElement("table");
     board.appendChild(brd_body);
+    board.className = "center"
 
     // 本体のページにゲーム盤を追加する
-    let body = document.getElementsByTagName("body")[0];
+    let body = document.getElementById("game");
     body.appendChild(board);
 }
 
