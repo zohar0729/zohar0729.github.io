@@ -1,0 +1,189 @@
+/* リバーシ盤のスタイル */
+table {
+    border-collapse: collapse;
+    border: solid 2px black;
+}
+table td {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: green;
+    border: solid 2px black;
+}
+table td.puttable {
+    background-color: greenyellow;
+}
+/* リバーシのコマのスタイル */
+div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+/* 一番下に表示される要素 */
+div.white {
+    background: black;
+    color: black;
+    border: solid 1px black;
+    position: relative;
+}
+/* 上から2番目に表示される要素 */
+div.white::before {
+    content: "";
+    background: white;
+    border: solid 1px black;
+    top: -2px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+/* 一番上に表示される要素 */
+div.white::after {
+    content: "";
+    background: white;
+    border: solid 1px black;
+    top: -4px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+.white.flip {
+    animation: flipToBlack forwards 1s ease 0s;
+}
+.white.flip::before {
+    animation: flipToWhiteSub forwards 1s ease 0s;
+}
+.white.flip::after {
+    animation: flipToWhiteSub forwards 1s ease 0s;
+}
+@keyframes flipToWhite {
+    0% {
+        background: black;
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+    49% {
+        transform: translateY(-20px) rotateX(90deg);
+        background: black;
+    }
+    51% {
+        transform: translateY(-20px) rotateX(90deg);
+        background: white;
+    }
+    75% {
+        transform: translateY(-20px);
+    }
+    100% {
+        background: white;
+    }
+}
+@keyframes flipToWhiteSub {
+    0% {
+        background: black;
+        border-color: white;
+    }
+    49% {
+        background: black;
+        border-color: white;
+    }
+    51% {
+        background: white;
+        border-color: black;
+    }
+    100% {
+        background: white;
+        border-color: black;
+    }
+}
+@keyframes flipToBlack {
+    0% {
+        background: white;
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+    49% {
+        transform: translateY(-20px) rotateX(90deg);
+        background: white;
+    }
+    51% {
+        transform: translateY(-20px) rotateX(90deg);
+        background: black;
+    }
+    75% {
+        transform: translateY(-20px);
+    }
+    100% {
+        background: black;
+    }
+}
+@keyframes flipToBlackSub {
+    0% {
+        background: white;
+        border-color: black;
+    }
+    49% {
+        background: white;
+        border-color: black;
+    }
+    51% {
+        background: black;
+        border-color: white;
+    }
+    100% {
+        background: black;
+        border-color: white;
+    }
+}
+div.black {
+    background: white;
+    color: white;
+    border: solid 1px white;
+    position: relative;
+}
+div.black::before {
+    content: "";
+    background: black;
+    border: solid 1px white;
+    top: -2px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+div.black::after {
+    content: "";
+    background: black;
+    border: solid 1px white;
+    top: -4px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+.black.flip {
+    animation: flipToWhite forwards 1s ease 0s;
+}
+.black.flip::before {
+    animation: flipToBlackSub forwards 1s ease 0s;
+}
+.black.flip::after {
+    animation: flipToBlackSub forwards 1s ease 0s;
+}
