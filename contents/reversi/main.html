@@ -3,17 +3,20 @@
     <head>
         <meta charset="utf-8">
         <title>オンライン・リバーシ</title>
-        <link rel="stylesheet" href="https://zohar0729.github.io/contents/reversi/style.css" type="text/css">
-        <!-- <link rel="stylesheet" href="./style.css" type="text/css"> -->
-        <script src="https://zohar0729.github.io/contents/reversi/script.js"></script>
-        <!-- <script src="./script.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://zohar0729.github.io/contents/reversi/style.css" type="text/css"> -->
+        <link rel="stylesheet" href="./style.css" type="text/css">
+        <!-- <script src="https://zohar0729.github.io/contents/reversi/script.js"></script> -->
+        <script src="./script.js"></script>
     </head>
     <body onload="onload()">
-        <p id="prompt"></p>
+        <div id="scoreboard" class="center">
+            <div id="count-white" class="score box-left">白 : 2</div>
+            <div id="count-black" class="score box-right">黒 : 2</div>
+        </div>
         <div id="game" class="center"></div>
         <div id="console" class="center">
-            <input type = "button" onclick = "reset_board()" value = "盤面リセット" class = "button-left">
-            <input type = "button" onclick = "change_turn()" value = "パス" class = "button-right">
+            <input type = "button" onclick = "reset_board()" value = "盤面リセット" class = "button box-left">
+            <input type = "button" onclick = "change_turn()" value = "パス" class = "button box-right">
         </div>
     </body>
 </html>

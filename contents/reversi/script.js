@@ -16,6 +16,8 @@ function set(row, col, color) {
             disk.className = "black";
             cell.appendChild(disk);
         }
+        // アニメーション終了時に自動で「裏返し中」フラグを折る
+        // このイベントハンドラ用意した人絶対にオセロ作ってたでしょ
         disk.addEventListener("animationend", function (event) {
             if (event.target.classList.contains("flip")) {
                 event.target.classList.remove("flip");
@@ -34,6 +36,20 @@ function set(row, col, color) {
         }
     }
     
+}
+// 色を取得する
+function get(row, col) {
+    let id = row + "," + col;
+    let cell = document.getElementById(id);
+    if (cell.hasChildNodes() == false) return "None";
+    else {
+        let color = cell.firstElementChild.classList;
+        if (color.contains("white")) return "white";
+        if (color.contains("black")) return "black";
+        else {
+            console.log("Huh?");
+        }
+    }
 }
 // コマを取り除く
 function unset(row, col) {
@@ -84,6 +100,24 @@ function highlight_puttable(event) {
         this.className = "puttable";
     }
 }
+// コマを置くことができるタイルを常に強調表示する
+function highlight_puttable2(color_flipper) {
+    let puttable_list = [];
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            let id = i + "," + j;
+            let cell = document.getElementById(id);
+            let flippable = get_flippable_list(i, j, color_flipper);
+            if (flippable.length > 0) {
+                puttable_list.push(flippable);
+                cell.className = "puttable";
+            } else {
+                cell.classList.remove("puttable");
+            }
+        }
+    }
+    // console.log(puttable_list);
+}
 // コマを置いて、裏返せるコマを裏返す
 function put_and_flip(event) {    
     // 裏返すことのできるコマがあれば裏返す
@@ -105,14 +139,21 @@ function flip(row, col) {
     if (disk.classList.contains("white")) disk.className = "black flip";
     else disk.className = "white flip";
 }
-
+// コマの数を数える
+function count_disk(color) {
+    let count = 0;
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (get(i, j) == color) count++;
+        }
+    }
+    return count;
+}
 function reset_style() {
     this.classList.remove("puttable");
 }
 function onload() {
     generate_board();
-    let prompt = document.getElementById("prompt");
-    prompt.textContent = "白色の手番です";
     reset_board();
 }
 function generate_board() {
@@ -123,8 +164,6 @@ function generate_board() {
         for (let j = 0; j < 8; j++) {
             let cell = document.createElement("td");
             cell.id = i + "," + j;
-            cell.onmouseover = highlight_puttable;
-            cell.onmouseleave = reset_style;
             cell.onclick = put_and_flip;
             row.appendChild(cell);
         }
@@ -144,19 +183,24 @@ function reset_board() {
     for (let i = 0; i < 64; i++) {
         unset(Math.floor(i / 8), i % 8);
     }
+    turn = "white";
     set(3, 3, "white");
     set(4, 4, "white");
     set(3, 4, "black");
     set(4, 3, "black");
+    highlight_puttable2(turn);
 }
+// ターンを進める
 function change_turn() {
-    let prompt = document.getElementById("prompt");
     if (turn == "white") {
         turn = "black";
-        prompt.textContent = "黒色の手番です";
     }
     else {
         turn = "white";
-        prompt.textContent = "白色の手番です";
     }
+    highlight_puttable2(turn);
+    let count_white = count_disk("white");
+    let count_black = count_disk("black");
+    document.getElementById("count-white").textContent = "白 : " + count_white;
+    document.getElementById("count-black").textContent = "黒 : " + count_black;
 }

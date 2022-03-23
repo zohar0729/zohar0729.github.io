@@ -4,25 +4,36 @@
     padding-left: auto;
     padding-right: auto;
 }
-.button-left {
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(50% - 1vw);
+.button {
     height: 20vw;
     font-size: 5vw;
     border: solid 0.5vw black;
     background-color: white;
 }
-.button-right {
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(50% - 1vw);
+div#scoreboard {
+    display: flex;
+}
+.score {
     height: 20vw;
-    font-size: 5vw;
+    font-size: 10vw;
     border: solid 0.5vw black;
     background-color: white;
+    border-radius: 0%;
+    text-align: center;
+    line-height: 20vw;
+}
+.box-left {
+    margin-left: auto;
+    margin-right: 1vw;
+    width: calc(50% - 2vw);
+}
+.box-right {
+    margin-left: 1vw;
+    margin-right: auto;
+    width: calc(50% - 2vw);
 }
 div#game {
+    margin-top: 5vw;
     margin-bottom: 5vw;
 }
 div#console {
@@ -50,9 +61,6 @@ table td.puttable {
 div {
     margin-left: auto;
     margin-right: auto;
-    width: 85%;
-    height: 85%;
-    border-radius: 50%;
 }
 /* 一番下に表示される要素 */
 div.white {
@@ -60,6 +68,9 @@ div.white {
     color: black;
     border: solid 0.5vw black;
     position: relative;
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
 }
 /* 上から2番目に表示される要素 */
 div.white::before {
@@ -185,6 +196,9 @@ div.black {
     color: white;
     border: solid 0.5vw black;
     position: relative;
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
 }
 div.black::before {
     content: "";
