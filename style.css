@@ -1,0 +1,16 @@
+body {
+    width: 80%;
+    margin: auto;
+    padding: 1em;
+    /* background-color:azure; */
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+    overflow-x: scroll;
+    overflow-y: visible;
+}
+
+em {
+    font-weight: 100;
+    font-style: normal;
+}
